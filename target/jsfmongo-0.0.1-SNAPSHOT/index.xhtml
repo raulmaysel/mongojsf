@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>JSF 2.2 TUTORIALS</title>
+</h:head>
+
+<h:body>
+	<h1>JSF 2.2 Hello World</h1>
+	<h:form>
+		<h:inputText value="#{persona.nombre}"></h:inputText> 
+		<h:commandButton value="Say Hello" action="hello"></h:commandButton>
+		<hr></hr>
+		<h2>Listado de personas</h2>
+		<h:commandLink action="#{agendaControlador.init()}" value="Inicializar" />
+		<h:dataTable var="per" value="#{agendaControlador.agenda}">
+			<h:column>
+				<h:outputText value="#{per.id}"/>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{per.nombre}"/>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{per.apellido}"/>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{per.edad}"/><h:commandLink action="#{agendaControlador.eliminar(per)}" value="&times;" />
+			</h:column>
+		</h:dataTable>
+		nombre:<h:inputText value="#{persona.nombre}" maxlength="10"></h:inputText> 
+		apellido:<h:inputText value="#{persona.apellido}"></h:inputText>
+		edad<h:inputText value="#{persona.edad}"  ></h:inputText>
+		<h:commandButton action="#{agendaControlador.insertar(persona)}" value="Añadir" />
+	</h:form>
+</h:body>
+</html>
