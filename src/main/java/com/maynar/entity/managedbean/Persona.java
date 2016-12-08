@@ -9,6 +9,7 @@ public class Persona {
 	private String nombre;
 	private String apellido;
 	private int edad;
+	private String email;
 //	private ArrayList<String> agenda = new ArrayList<String>();;
 	
 	
@@ -56,6 +57,16 @@ public class Persona {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 
 //	public ArrayList<String> getAgenda() {
 //		return agenda;

@@ -2,26 +2,21 @@ package com.maynar.entity.managedbean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import org.bson.Document;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.maynar.service.PersonaService;
+import com.maynar.service.impl.PersonaServiceImpl;
 
 @ManagedBean
 @ApplicationScoped
 public class AgendaControlador {
-
+ 	
 	private ArrayList<Persona> agenda;
 
+	private PersonaService personaService = new PersonaServiceImpl();
+	
 	public ArrayList<Persona> getAgenda() {
 		return agenda;
 	}
@@ -37,28 +32,9 @@ public class AgendaControlador {
 			agenda = new ArrayList<Persona>();
 			per.setId(1L);
 		}
-		// Connect to MongoDB server
-		MongoClient mongo = new MongoClient("localhost", 27017);
+		//Insert object into DB through service
+		personaService.insert(per);
 		
-		// Display all databases
-		List<String> dbs = mongo.getDatabaseNames();
-		for (String database : dbs) {
-			System.out.println(database);
-		}
-		
-		// Get database. If the database doesn’t exist, MongoDB will create it
-		// for you.
-		MongoDatabase db = mongo.getDatabase("personas");
-		
-		//Get collection / table.
-		MongoCollection<Document> table = db.getCollection("personas");
-		
-		//Save data
-		Document document = new Document();
-		document.put("nombre", per.getNombre());
-		document.put("edad", per.getEdad());
-		table.insertOne(document);
-		mongo.close();
 		this.agenda.add(per);
 		return null;
 	}
